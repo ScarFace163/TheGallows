@@ -10,15 +10,20 @@ import java.util.Random;
 public class CategoryServiceImpl implements CategoryService{
     Map<String, List<Word>> categoryMap;
     @Override
-    public boolean isValidCategoryNumber(int number) {
+    public boolean isValidCategoryNumber(String number) {
         List<String> temp = new ArrayList<>(categoryMap.keySet());
-        return number >= 0 && number <= temp.size();
+        try{
+            int numberInt = Integer.parseInt(number);
+            return numberInt>=0 && numberInt<=temp.size();
+        } catch (NumberFormatException e){
+            return false;
+        }
     }
 
     @Override
-    public String findCategory(int number) {
+    public String findCategory(String number) {
         List<String> temp = new ArrayList<>(categoryMap.keySet());
-        return temp.get(number);
+        return temp.get(Integer.parseInt(number));
     }
     @Override
     public List<String> getCategories(){
