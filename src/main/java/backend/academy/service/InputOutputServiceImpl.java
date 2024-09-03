@@ -8,8 +8,9 @@ import java.util.Scanner;
 
 public class InputOutputServiceImpl implements InputOutputService{
     CategoryService categoryService;
+    SessionService sessionService;
     Scanner sc;
-    List <String> gallowArr;
+    List <String> gallowsArr;
     @Override
     public String printCategoryChoose() {
         System.out.println("Choose one of the suggested categories. If you want to randomize, press enter without typing.");
@@ -24,7 +25,7 @@ public class InputOutputServiceImpl implements InputOutputService{
         do{
             categoryChoose = sc.nextLine();
             if (categoryChoose.isEmpty()) return null;
-        }while (!categoryService.isValidCategoryNumber(Integer.parseInt(categoryChoose)));
+        }while ( !categoryService.isValidCategoryNumber(categoryChoose));
         return categoryChoose;
     }
 
@@ -42,8 +43,25 @@ public class InputOutputServiceImpl implements InputOutputService{
 
     }
 
+    @Override
+    public boolean conductGameProcess(Session session) {
+        while (!sessionService.isGameEnded(session)) {
+            printCurrentGameState(session);
+            int errorLeft = session.maxAttemptsNumber()-session.currentAttemptsNumber();
+            System.out.println("Errors left: " + errorLeft);
+            if (errorLeft == 2){
+                System.out.println("HINT: " + session.answer().HINT());
+            }
+            System.out.println("Enter letter");
+            String letter = sc.nextLine();
+            if (sessionService.checkLetter(session, letter)) sessionService.putLetter(session,letter) ;
+        }
+        printCurrentGameState(session);
+        return session.currentAttemptsNumber() != session.maxAttemptsNumber();
+    }
+
     private void printGallow(Session session) {
-        System.out.println(gallowArr.get(session.currentAttemptsNumber()));
+        System.out.println(gallowsArr.get(session.currentAttemptsNumber()));
     }
 
     private void printCurrentGuess(Session session){
@@ -65,53 +83,54 @@ public class InputOutputServiceImpl implements InputOutputService{
     }
 
     public InputOutputServiceImpl() {
-        this.categoryService = new CategoryServiceImpl();
-        this.sc =  new Scanner(System.in);
-        gallowArr = new ArrayList<>();
-        gallowArr.add("""
+        categoryService = new CategoryServiceImpl();
+        sessionService = new SessionServiceImpl();
+        sc =  new Scanner(System.in);
+        gallowsArr = new ArrayList<>();
+        gallowsArr.add("""
             *----*
                  |
                  |
                  |
                =====""");
-        gallowArr.add("""
+        gallowsArr.add("""
              *----*
              O    |
                   |
                   |
                 =====\
             """);
-        gallowArr.add("""
+        gallowsArr.add("""
             *----*
              O    |
              |    |
                   |
                 =====""");
-        gallowArr.add("""
+        gallowsArr.add("""
              *----*
              O    |
             /|    |
                   |
                 =====""");
-        gallowArr.add("""
+        gallowsArr.add("""
              *----*
              O    |
             /|\\   |
                   |
                 =====""");
-        gallowArr.add("""
+        gallowsArr.add("""
              *----*
              O    |
             /|\\   |
              |    |
                 =====""");
-        gallowArr.add("""
+        gallowsArr.add("""
             *----*
              O   |
             /|\\  |
             /    |
                 =====""");
-        gallowArr.add("""
+        gallowsArr.add("""
             *----*
              O   |
             /|\\  |
