@@ -7,10 +7,8 @@ import backend.academy.service.InputOutputService;
 import backend.academy.service.InputOutputServiceImpl;
 import backend.academy.service.WordService;
 import backend.academy.service.WordServiceImpl;
-import java.util.Scanner;
 
 public class MainController implements Controller {
-    Scanner sc;
     CategoryService categoryService;
     InputOutputService inputOutputService;
     WordService wordService;
@@ -21,7 +19,7 @@ public class MainController implements Controller {
         if (categoryChoose==null) {
             categoryChoose = String.valueOf(categoryService.getRandomCategoryNumber());
         }
-        categoryChoose =  categoryService.findCategory(Integer.parseInt(categoryChoose));
+        categoryChoose =  categoryService.findCategory(categoryChoose);
         System.out.println("Chosen category : " + categoryChoose +"\n");
         int difficultChoose = inputOutputService.printDifficultChoose();
         switch (difficultChoose){
@@ -40,7 +38,6 @@ public class MainController implements Controller {
     }
 
     public MainController() {
-        sc = new Scanner(System.in);
         categoryService = new CategoryServiceImpl();
         inputOutputService = new InputOutputServiceImpl();
         wordService = new WordServiceImpl();
