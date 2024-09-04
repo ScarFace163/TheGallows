@@ -56,7 +56,7 @@ public class CategoryServiceImpl implements CategoryService{
         categoryMap.put("Animal" , animalsList);
         List<Word> professions = new ArrayList<>();
         professions.add(new Word(new char[]{'t','e','a','c','h','e','r'} , "That make dumb people smart" , 2));
-        professions.add(new Word(new char[]{'p','o','l','i','c','e','m' ,'a','n'} , "That make dumb people smart" , 2));
+        professions.add(new Word(new char[]{'p','o','l','i','c','e','m' ,'a','n'} , "Catches bad guys" , 2));
         professions.add(new Word(new char[]{'c','l','o','w','n'} , "Scary one" , 1));
         professions.add(new Word(new char[]{'p','o','s','t','m','a','n'} , "Backenders use this" , 3));
         categoryMap.put("Profession" , professions);
