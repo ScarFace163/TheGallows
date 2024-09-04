@@ -13,6 +13,7 @@ public class SessionServiceImpl implements SessionService {
     }
     @Override
     public boolean checkLetter(Session session, String letter) {
+        addLetterToLetterList(session,letter);
         if( !letter.isEmpty() && !findLetterPositionInAnswer(session, letter).isEmpty()) return true;
         else session.currentAttemptsNumber(session.currentAttemptsNumber()+1);
         return false;
@@ -31,6 +32,12 @@ public class SessionServiceImpl implements SessionService {
             if (answerValue[i] == Character.toLowerCase(letter.charAt(0))) positions.add(i);
         }
         return positions;
+    }
+
+
+    
+    private void addLetterToLetterList(Session session, String letter){
+        session.usedLettersSet().add(Character.toLowerCase(letter.charAt(0)));
     }
 
 }
