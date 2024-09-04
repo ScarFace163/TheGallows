@@ -3,10 +3,13 @@ package backend.academy.model;
 import lombok.Getter;
 import lombok.Setter;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter public class Session {
     @Setter private char[] currentGuess;
     @Setter private int currentAttemptsNumber;
+    private Set<Character> usedLettersSet;
     private final int maxAttemptsNumber;
     private final Word answer;
 
@@ -15,9 +18,8 @@ import java.util.Arrays;
         this.answer = answer;
         this.currentGuess = new char[answer.VALUE().length];
         this.currentAttemptsNumber = 0;
+        usedLettersSet = new HashSet<>();
         maxAttemptsNumber = 7;
-        //this.maxAttemptsNumber = answer.VALUE().length;
-
         Arrays.fill(currentGuess,'_');
     }
 
