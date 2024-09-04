@@ -38,7 +38,7 @@ public class InputOutputServiceImpl implements InputOutputService{
 
     @Override
     public void printCurrentGameState(Session session) {
-        printGallow(session);
+        printGallows(session);
         printCurrentGuess(session);
 
     }
@@ -48,22 +48,36 @@ public class InputOutputServiceImpl implements InputOutputService{
         while (!sessionService.isGameEnded(session)) {
             printCurrentGameState(session);
             int errorLeft = session.maxAttemptsNumber()-session.currentAttemptsNumber();
+            printCurrentLetterInput(session);
             System.out.println("Errors left: " + errorLeft);
-            if (errorLeft == 2){
-                System.out.println("HINT: " + session.answer().HINT());
-            }
-            System.out.println("Enter letter");
+            if (errorLeft >= 3) System.out.println("Enter letter or -1 if you want a hint");
+            else System.out.println("Enter letter");
             String letter = sc.nextLine();
+            if (errorLeft>=3 && letter.equals("-1")) {
+                printHint(session);
+                continue;
+            }
+            if (!checkLetter(session,letter)) continue;
             if (sessionService.checkLetter(session, letter)) sessionService.putLetter(session,letter) ;
         }
         printCurrentGameState(session);
         return session.currentAttemptsNumber() != session.maxAttemptsNumber();
     }
-
-    private void printGallow(Session session) {
+    private boolean checkLetter(Session session,String letter){
+        if (letter.length()!=1) return false;
+        if (session.usedLettersSet().contains(letter.charAt(0))) return false;
+        return Character.isLetter(letter.charAt(0));
+    }
+    private void printGallows(Session session) {
         System.out.println(gallowsArr.get(session.currentAttemptsNumber()));
     }
-
+    private void printHint(Session session){
+        System.out.println("HINT: " + session.answer().HINT());
+        session.currentAttemptsNumber(session.currentAttemptsNumber()+2);
+    }
+    private void printCurrentLetterInput(Session session){
+        if (!session.usedLettersSet().isEmpty()) System.out.println(session.usedLettersSet());
+    }
     private void printCurrentGuess(Session session){
         char[] currentGuess = session.currentGuess();
         for (char ch : currentGuess) {
