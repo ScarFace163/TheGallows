@@ -10,7 +10,10 @@ public class GameController implements  Controller{
     @Override
     public void control() {
         if (inputOutputService.conductGameProcess(session)) System.out.println("You win!");
-        else System.out.println("You lose!");
+        else {
+            System.out.println("You lose!");
+            System.out.println("Answer was: "+ String.valueOf(session.answer().VALUE()));
+        }
     }
 
     public GameController(Session session) {
