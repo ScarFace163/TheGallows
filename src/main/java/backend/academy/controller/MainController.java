@@ -16,13 +16,13 @@ public class MainController implements Controller {
     @Override
     public void control() {
         String categoryChoose = inputOutputService.printCategoryChoose();
-        if (categoryChoose==null) {
+        if (categoryChoose == null) {
             categoryChoose = String.valueOf(categoryService.getRandomCategoryNumber());
         }
-        categoryChoose =  categoryService.findCategory(categoryChoose);
-        System.out.println("Chosen category : " + categoryChoose +"\n");
+        categoryChoose = categoryService.findCategory(categoryChoose);
+        System.out.println("Chosen category : " + categoryChoose + "\n");
         int difficultChoose = inputOutputService.printDifficultChoose();
-        switch (difficultChoose){
+        switch (difficultChoose) {
             case 1:
                 System.out.println("Chosen difficult : Easy\n");
                 break;
@@ -33,7 +33,9 @@ public class MainController implements Controller {
                 System.out.println("Chosen difficult  : Hard\n");
                 break;
         }
-        GameController gameController = new GameController(new Session(wordService.chooseWordByDifficultFromList(categoryService.getWordsListByCategory(categoryChoose),difficultChoose)));
+        GameController gameController = new GameController(new Session(
+            wordService.chooseWordByDifficultFromList(categoryService.getWordsListByCategory(categoryChoose),
+                difficultChoose)));
         gameController.control();
     }
 

@@ -9,10 +9,9 @@ import java.util.Set;
 @Getter public class Session {
     @Setter private char[] currentGuess;
     @Setter private int currentAttemptsNumber;
-    private Set<Character> usedLettersSet;
+    private final Set<Character> usedLettersSet;
     private final int maxAttemptsNumber;
     private final Word answer;
-
 
     public Session(Word answer) {
         this.answer = answer;
@@ -20,7 +19,7 @@ import java.util.Set;
         this.currentAttemptsNumber = 0;
         usedLettersSet = new HashSet<>();
         maxAttemptsNumber = 7;
-        Arrays.fill(currentGuess,'_');
+        Arrays.fill(currentGuess, '_');
     }
 
 }

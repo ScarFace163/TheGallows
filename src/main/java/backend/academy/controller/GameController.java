@@ -4,15 +4,17 @@ import backend.academy.model.Session;
 import backend.academy.service.InputOutputService;
 import backend.academy.service.InputOutputServiceImpl;
 
-public class GameController implements  Controller{
+public class GameController implements Controller {
     InputOutputService inputOutputService;
     Session session;
+
     @Override
     public void control() {
-        if (inputOutputService.conductGameProcess(session)) System.out.println("You win!");
-        else {
+        if (inputOutputService.conductGameProcess(session)) {
+            System.out.println("You win!");
+        } else {
             System.out.println("You lose!");
-            System.out.println("Answer was: "+ String.valueOf(session.answer().VALUE()));
+            System.out.println("Answer was: " + String.valueOf(session.answer().VALUE()));
         }
     }
 
