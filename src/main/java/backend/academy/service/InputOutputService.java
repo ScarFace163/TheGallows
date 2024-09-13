@@ -10,4 +10,8 @@ public interface InputOutputService {
     void printCurrentGameState(Session session);
 
     boolean conductGameProcess(Session session);
+
+    void println(String s);
+
+    void print(String s);
 }

@@ -11,7 +11,7 @@ public class WordServiceImpl implements WordService {
         Random random = new Random();
         List<Word> listByDifficult = new ArrayList<>();
         for (Word w : wordList) {
-            if (w.DIFFICULT() == difficult) {
+            if (w.difficult() == difficult) {
                 listByDifficult.add(w);
             }
         }

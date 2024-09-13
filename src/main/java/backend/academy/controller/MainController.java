@@ -14,23 +14,27 @@ public class MainController implements Controller {
     WordService wordService;
 
     @Override
+    @SuppressWarnings("checkstyle:MagicNumber")
     public void control() {
         String categoryChoose = inputOutputService.printCategoryChoose();
         if (categoryChoose == null) {
             categoryChoose = String.valueOf(categoryService.getRandomCategoryNumber());
         }
         categoryChoose = categoryService.findCategory(categoryChoose);
-        System.out.println("Chosen category : " + categoryChoose + "\n");
+        inputOutputService.print("Chosen category : " + categoryChoose + "\n");
         int difficultChoose = inputOutputService.printDifficultChoose();
         switch (difficultChoose) {
             case 1:
-                System.out.println("Chosen difficult : Easy\n");
+                inputOutputService.print("Chosen difficult : Easy\n");
                 break;
             case 2:
-                System.out.println("Chosen difficult  : Medium\n");
+                inputOutputService.print("Chosen difficult  : Medium\n");
                 break;
             case 3:
-                System.out.println("Chosen difficult  : Hard\n");
+                inputOutputService.print("Chosen difficult  : Hard\n");
+                break;
+            default:
+                inputOutputService.print("There is no such difficult, type another onr");
                 break;
         }
         GameController gameController = new GameController(new Session(

@@ -3,14 +3,14 @@ package backend.academy.model;
 import lombok.Getter;
 
 @Getter public class Word {
-    private final char[] VALUE;
-    private final String HINT;
-    private final int DIFFICULT;
+    private final char[] value;
+    private final String hint;
+    private final int difficult;
 
-    public Word(char[] VALUE, String HINT, int DIFFICULT) {
-        this.VALUE = VALUE;
-        this.HINT = HINT;
-        this.DIFFICULT = DIFFICULT;
+    public Word(char[] value, String hint, int difficult) {
+        this.value = value;
+        this.hint = hint;
+        this.difficult = difficult;
     }
 
 }

@@ -14,11 +14,11 @@ public class InputOutputServiceImpl implements InputOutputService {
 
     @Override
     public String printCategoryChoose() {
-        System.out.println(
+        println(
             "Choose one of the suggested categories. If you want to randomize, press enter without typing.");
         List<String> categories = categoryService.getCategories();
         for (int i = 0; i < categories.size(); i++) {
-            System.out.println(i + " - " + categories.get(i));
+            println(i + " - " + categories.get(i));
         }
         return inputCategoryNumber();
     }
@@ -36,8 +36,9 @@ public class InputOutputServiceImpl implements InputOutputService {
 
     @Override
     public int printDifficultChoose() {
-        System.out.println(
-            "Choose one of the suggested difficult. If you want to randomize, press enter without typing.\n1 - Easy\n2 - Medium\n3 - Hard");
+        print(
+            "Choose one of the suggested difficult.");
+        println(" If you want to randomize, press enter without typing.\n1 - Easy\n2 - Medium\n3 - Hard");
         return inputDifficultNumber();
 
     }
@@ -49,17 +50,18 @@ public class InputOutputServiceImpl implements InputOutputService {
 
     }
 
+    @SuppressWarnings("checkstyle:MagicNumber")
     @Override
     public boolean conductGameProcess(Session session) {
         while (!sessionService.isGameEnded(session)) {
             printCurrentGameState(session);
             int errorLeft = session.maxAttemptsNumber() - session.currentAttemptsNumber();
             printCurrentLetterInput(session);
-            System.out.println("Errors left: " + errorLeft);
+            println("Errors left: " + errorLeft);
             if (errorLeft >= 3) {
-                System.out.println("Enter letter or -1 if you want a hint");
+                println("Enter letter or -1 if you want a hint");
             } else {
-                System.out.println("Enter letter");
+                println("Enter letter");
             }
             String letter = sc.nextLine();
             if (errorLeft >= 3 && letter.equals("-1")) {
@@ -77,6 +79,18 @@ public class InputOutputServiceImpl implements InputOutputService {
         return session.currentAttemptsNumber() != session.maxAttemptsNumber();
     }
 
+    @SuppressWarnings("checkstyle:RegexpSinglelineJava")
+    @Override
+    public void println(String s) {
+        System.out.println(s);
+    }
+
+    @SuppressWarnings("checkstyle:RegexpSinglelineJava")
+    @Override
+    public void print(String s) {
+        System.out.print(s);
+    }
+
     private boolean checkLetter(Session session, String letter) {
         if (letter.length() != 1) {
             return false;
@@ -88,28 +102,29 @@ public class InputOutputServiceImpl implements InputOutputService {
     }
 
     private void printGallows(Session session) {
-        System.out.println(gallowsArr.get(session.currentAttemptsNumber()));
+        println(gallowsArr.get(session.currentAttemptsNumber()));
     }
 
     private void printHint(Session session) {
-        System.out.println("HINT: " + session.answer().HINT());
+        println("HINT: " + session.answer().hint());
         session.currentAttemptsNumber(session.currentAttemptsNumber() + 2);
     }
 
     private void printCurrentLetterInput(Session session) {
         if (!session.usedLettersSet().isEmpty()) {
-            System.out.println(session.usedLettersSet());
+            println(session.usedLettersSet().toString());
         }
     }
 
     private void printCurrentGuess(Session session) {
         char[] currentGuess = session.currentGuess();
         for (char ch : currentGuess) {
-            System.out.print(ch + " ");
+            print(ch + " ");
         }
-        System.out.println("\n");
+        println("\n");
     }
 
+    @SuppressWarnings("checkstyle:MagicNumber")
     private int inputDifficultNumber() {
         Random random = new Random();
         String difficultChoose;

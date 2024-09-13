@@ -9,8 +9,8 @@ public class SessionServiceImpl implements SessionService {
     @Override
     public boolean isGameEnded(Session session) {
 
-        return String.valueOf(session.currentGuess()).equals(String.valueOf(session.answer().VALUE())) ||
-            session.currentAttemptsNumber() >= session.maxAttemptsNumber();
+        return String.valueOf(session.currentGuess()).equals(String.valueOf(session.answer().value()))
+            || session.currentAttemptsNumber() >= session.maxAttemptsNumber();
     }
 
     @Override
@@ -32,7 +32,7 @@ public class SessionServiceImpl implements SessionService {
     }
 
     private List<Integer> findLetterPositionInAnswer(Session session, String letter) {
-        char[] answerValue = session.answer().VALUE();
+        char[] answerValue = session.answer().value();
         List<Integer> positions = new ArrayList<>();
         for (int i = 0; i < answerValue.length; i++) {
             if (answerValue[i] == Character.toLowerCase(letter.charAt(0))) {

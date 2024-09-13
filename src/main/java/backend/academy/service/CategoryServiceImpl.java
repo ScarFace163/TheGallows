@@ -49,6 +49,7 @@ public class CategoryServiceImpl implements CategoryService {
         setInitialData();
     }
 
+    @SuppressWarnings("checkstyle:MagicNumber")
     private void setInitialData() {
         List<Word> animalsList = new ArrayList<>();
         animalsList.add(new Word(new char[] {'c', 'o', 'w'}, "Makes milk", 1));
