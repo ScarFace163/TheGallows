@@ -31,6 +31,12 @@ public class SessionServiceImpl implements SessionService {
         }
     }
 
+    @Override
+    public void useHint(Session session) {
+        session.isHintUsed(true);
+        session.currentAttemptsNumber(session.currentAttemptsNumber() + 2);
+    }
+
     private List<Integer> findLetterPositionInAnswer(Session session, String letter) {
         char[] answerValue = session.answer().value();
         List<Integer> positions = new ArrayList<>();

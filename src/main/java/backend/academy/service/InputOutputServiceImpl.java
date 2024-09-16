@@ -58,13 +58,13 @@ public class InputOutputServiceImpl implements InputOutputService {
             int errorLeft = session.maxAttemptsNumber() - session.currentAttemptsNumber();
             printCurrentLetterInput(session);
             println("Errors left: " + errorLeft);
-            if (errorLeft >= 3) {
+            if (errorLeft >= 3 && !session.isHintUsed()) {
                 println("Enter letter or -1 if you want a hint");
             } else {
                 println("Enter letter");
             }
             String letter = sc.nextLine();
-            if (errorLeft >= 3 && letter.equals("-1")) {
+            if (errorLeft >= 3 && letter.equals("-1") && !session.isHintUsed()) {
                 printHint(session);
                 continue;
             }
@@ -107,7 +107,7 @@ public class InputOutputServiceImpl implements InputOutputService {
 
     private void printHint(Session session) {
         println("HINT: " + session.answer().hint());
-        session.currentAttemptsNumber(session.currentAttemptsNumber() + 2);
+        sessionService.useHint(session);
     }
 
     private void printCurrentLetterInput(Session session) {

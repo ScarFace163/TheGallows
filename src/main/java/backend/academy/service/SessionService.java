@@ -8,4 +8,6 @@ public interface SessionService {
     boolean checkLetter(Session session, String letter);
 
     void putLetter(Session session, String letter);
+
+    void useHint(Session session);
 }
