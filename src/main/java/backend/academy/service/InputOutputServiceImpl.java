@@ -8,10 +8,11 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class InputOutputServiceImpl implements InputOutputService {
-    CategoryService categoryService;
-    SessionService sessionService;
-    Scanner sc;
-    List<String> gallowsArr;
+    private final CategoryService categoryService;
+    private final SessionService sessionService;
+    private final Scanner sc;
+    private final List<String> gallowsArr;
+    private final Random random = new Random();
 
     @Override
     public String printCategoryChoose() {
@@ -126,14 +127,13 @@ public class InputOutputServiceImpl implements InputOutputService {
 
     @SuppressWarnings("checkstyle:MagicNumber")
     private int inputDifficultNumber() {
-        Random random = new Random();
         String difficultChoose;
         do {
             difficultChoose = sc.nextLine();
             if (difficultChoose.isEmpty()) {
                 return random.nextInt(3) + 1;
             }
-        } while (!difficultChoose.equals("1") && !difficultChoose.equals("2") && !difficultChoose.equals("3"));
+        } while (!"1".equals(difficultChoose) && !"2".equals(difficultChoose) && !"3".equals(difficultChoose));
         return Integer.parseInt(difficultChoose);
     }
 
