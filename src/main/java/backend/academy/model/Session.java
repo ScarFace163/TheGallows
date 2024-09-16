@@ -10,17 +10,20 @@ import lombok.Setter;
     @Setter private char[] currentGuess;
     @Setter private int currentAttemptsNumber;
     @Setter private boolean isHintUsed;
+    private final int minErrorsForHint;
     private final Set<Character> usedLettersSet;
-    private final int maxAttemptsNumber = 7;
+    private final int maxAttemptsNumber;
     private final Word answer;
 
-
+    @SuppressWarnings("checkstyle:MagicNumber")
     public Session(Word answer) {
         this.answer = answer;
         this.currentGuess = new char[answer.value().length];
         this.currentAttemptsNumber = 0;
         this.isHintUsed = false;
-        usedLettersSet = new HashSet<>();
+        this.minErrorsForHint = 3;
+        this.maxAttemptsNumber = 7;
+        this.usedLettersSet = new HashSet<>();
         Arrays.fill(currentGuess, '_');
     }
 

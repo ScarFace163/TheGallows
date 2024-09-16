@@ -1,6 +1,7 @@
 package backend.academy.service;
 
 import backend.academy.model.Session;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -50,7 +51,6 @@ public class InputOutputServiceImpl implements InputOutputService {
 
     }
 
-    @SuppressWarnings("checkstyle:MagicNumber")
     @Override
     public boolean conductGameProcess(Session session) {
         while (!sessionService.isGameEnded(session)) {
@@ -58,13 +58,13 @@ public class InputOutputServiceImpl implements InputOutputService {
             int errorLeft = session.maxAttemptsNumber() - session.currentAttemptsNumber();
             printCurrentLetterInput(session);
             println("Errors left: " + errorLeft);
-            if (errorLeft >= 3 && !session.isHintUsed()) {
+            if (errorLeft >= session.minErrorsForHint() && !session.isHintUsed()) {
                 println("Enter letter or -1 if you want a hint");
             } else {
                 println("Enter letter");
             }
             String letter = sc.nextLine();
-            if (errorLeft >= 3 && letter.equals("-1") && !session.isHintUsed()) {
+            if (errorLeft >= session.minErrorsForHint() && "-1".equals(letter) && !session.isHintUsed()) {
                 printHint(session);
                 continue;
             }
@@ -140,7 +140,7 @@ public class InputOutputServiceImpl implements InputOutputService {
     public InputOutputServiceImpl() {
         categoryService = new CategoryServiceImpl();
         sessionService = new SessionServiceImpl();
-        sc = new Scanner(System.in);
+        sc = new Scanner(System.in, StandardCharsets.UTF_8);
         gallowsArr = new ArrayList<>();
         gallowsArr.add("""
             *----*
