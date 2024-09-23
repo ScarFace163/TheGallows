@@ -9,8 +9,8 @@ public class SessionServiceImpl implements SessionService {
     @Override
     public boolean isGameEnded(Session session) {
 
-        return String.valueOf(session.currentGuess()).equals(String.valueOf(session.answer().value()))
-            || session.currentAttemptsNumber() >= session.maxAttemptsNumber();
+        return session.currentAttemptsNumber() >= session.maxAttemptsNumber()
+            || String.valueOf(session.currentGuess()).equals(String.valueOf(session.answer().value()));
     }
 
     @Override

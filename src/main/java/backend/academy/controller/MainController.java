@@ -34,7 +34,7 @@ public class MainController implements Controller {
                 inputOutputService.print("Chosen difficult  : Hard\n");
                 break;
             default:
-                inputOutputService.print("There is no such difficult, type another onr");
+                inputOutputService.print("There is no such difficult, type another one");
                 break;
         }
         GameController gameController = new GameController(new Session(
