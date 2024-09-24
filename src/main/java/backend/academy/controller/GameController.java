@@ -5,8 +5,8 @@ import backend.academy.service.InputOutputService;
 import backend.academy.service.InputOutputServiceImpl;
 
 public class GameController implements Controller {
-    InputOutputService inputOutputService;
-    Session session;
+    private final InputOutputService inputOutputService;
+    private final Session session;
 
     @Override
     public void control() {
