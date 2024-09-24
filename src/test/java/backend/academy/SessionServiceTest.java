@@ -1,5 +1,6 @@
 package backend.academy;
 
+import backend.academy.enums.Difficult;
 import backend.academy.model.Session;
 import backend.academy.model.Word;
 import backend.academy.service.SessionServiceImpl;
@@ -29,7 +30,7 @@ public class SessionServiceTest {
         assertTrue(sessionService.isGameEnded(session));
 
         char[] testWord = {'t', 'e', 's', 't'};
-        when(session.answer()).thenReturn(new Word(testWord, "test", 1));
+        when(session.answer()).thenReturn(new Word(testWord, "test", Difficult.EASY));
         char[] currentGuess = {'_', '_', '_', '_'};
         when(session.currentGuess()).thenReturn(currentGuess);
         when(session.currentAttemptsNumber()).thenReturn(4);
@@ -40,7 +41,7 @@ public class SessionServiceTest {
     @Test
     public void testCheckLetter() {
         char[] testWord = {'t', 'e', 's', 't'};
-        when(session.answer()).thenReturn(new Word(testWord, "test", 1));
+        when(session.answer()).thenReturn(new Word(testWord, "test", Difficult.EASY));
         assertTrue(sessionService.checkLetter(session, "t"));
         assertFalse(sessionService.checkLetter(session, "x"));
     }

@@ -2,6 +2,7 @@ package backend.academy;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import backend.academy.enums.Difficult;
 import backend.academy.model.Word;
 import backend.academy.service.WordService;
 import backend.academy.service.WordServiceImpl;
@@ -27,12 +28,12 @@ public class WordServiceTest {
     @Test
     public void testChooseWordByDifficultFromList() {
         List<Word> wordList = Arrays.asList(
-            new Word(new char[]{'e', 'a', 's', 'y'}, "easy", 1),
-            new Word(new char[]{'m', 'e', 'd', 'i', 'u', 'm'}, "medium", 2),
-            new Word(new char[]{'h', 'a', 'r', 'd'}, "hard", 3)
+            new Word(new char[]{'e', 'a', 's', 'y'}, "easy", Difficult.EASY),
+            new Word(new char[]{'m', 'e', 'd', 'i', 'u', 'm'}, "medium", Difficult.EASY),
+            new Word(new char[]{'h', 'a', 'r', 'd'}, "hard", Difficult.EASY)
         );
 
-        Word result = wordService.chooseWordByDifficultFromList(wordList, 2);
-        assertEquals(2, result.difficult());
+        Word result = wordService.chooseWordByDifficultFromList(wordList, Difficult.MEDIUM);
+        assertEquals(Difficult.MEDIUM, result.difficult());
     }
 }

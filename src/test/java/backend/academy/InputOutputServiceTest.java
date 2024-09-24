@@ -3,6 +3,7 @@ package backend.academy;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import backend.academy.enums.Difficult;
 import backend.academy.service.InputOutputService;
 import backend.academy.service.InputOutputServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,10 +32,10 @@ public class InputOutputServiceTest {
     @Test
     public void testPrintDifficultChoose() {
         InputOutputService mockService = Mockito.mock(InputOutputService.class);
-        when(mockService.printDifficultChoose()).thenReturn(1);
+        when(mockService.printDifficultChoose()).thenReturn(Difficult.EASY);
 
-        int result = mockService.printDifficultChoose();
-        assertEquals(1, result);
+        Difficult result = mockService.printDifficultChoose();
+        assertEquals(Difficult.EASY, result);
     }
 
     @Test
