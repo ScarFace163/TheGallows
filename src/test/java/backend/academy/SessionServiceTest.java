@@ -25,16 +25,16 @@ public class SessionServiceTest {
 
     @Test
     public void testIsGameEnded() {
-        when(session.currentAttemptsNumber()).thenReturn(5);
-        when(Session.MAX_ATTEMPTS_NUMBER).thenReturn(5);
-        assertTrue(sessionService.isGameEnded(session));
-
+        when(session.currentAttemptsNumber()).thenReturn(7);
         char[] testWord = {'t', 'e', 's', 't'};
         when(session.answer()).thenReturn(new Word(testWord, "test", Difficult.EASY));
         char[] currentGuess = {'_', '_', '_', '_'};
         when(session.currentGuess()).thenReturn(currentGuess);
+        assertTrue(sessionService.isGameEnded(session));
+
+        when(session.answer()).thenReturn(new Word(testWord, "test", Difficult.EASY));
+        when(session.currentGuess()).thenReturn(currentGuess);
         when(session.currentAttemptsNumber()).thenReturn(4);
-        when(Session.MAX_ATTEMPTS_NUMBER).thenReturn(5);
         assertFalse(sessionService.isGameEnded(session));
     }
 
