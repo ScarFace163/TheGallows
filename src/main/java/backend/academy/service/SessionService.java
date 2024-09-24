@@ -10,4 +10,6 @@ public interface SessionService {
     void putLetter(Session session, String letter);
 
     void useHint(Session session);
+
+    boolean checkLetterInSet(Session session, String letter);
 }

@@ -37,6 +37,17 @@ public class SessionServiceImpl implements SessionService {
         session.currentAttemptsNumber(session.currentAttemptsNumber() + 2);
     }
 
+    @Override
+    public boolean checkLetterInSet(Session session, String letter) {
+        if (letter.length() != 1) {
+            return false;
+        }
+        if (session.usedLettersSet().contains(letter.charAt(0))) {
+            return false;
+        }
+        return Character.isLetter(letter.charAt(0));
+    }
+
     private List<Integer> findLetterPositionInAnswer(Session session, String letter) {
         char[] answerValue = session.answer().value();
         List<Integer> positions = new ArrayList<>();

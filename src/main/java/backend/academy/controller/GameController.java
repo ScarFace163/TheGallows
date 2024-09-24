@@ -1,25 +1,29 @@
 package backend.academy.controller;
 
 import backend.academy.model.Session;
-import backend.academy.service.InputOutputService;
-import backend.academy.service.InputOutputServiceImpl;
+import backend.academy.service.GameService;
+import backend.academy.service.GameServiceImpl;
+import backend.academy.service.OutputService;
+import backend.academy.service.OutputServiceImpl;
 
 public class GameController implements Controller {
-    private final InputOutputService inputOutputService;
+    private final GameService gameService;
     private final Session session;
+    private final OutputService outputService;
 
     @Override
     public void control() {
-        if (inputOutputService.conductGameProcess(session)) {
-            inputOutputService.print("You win!");
+        if (gameService.conductGameProcess(session)) {
+            outputService.print("You win!");
         } else {
-            inputOutputService.print("You lose!");
-            inputOutputService.print("Answer was: " + String.valueOf(session.answer().value()));
+            outputService.print("You lose!");
+            outputService.print("Answer was: " + String.valueOf(session.answer().value()));
         }
     }
 
     public GameController(Session session) {
         this.session = session;
-        inputOutputService = new InputOutputServiceImpl();
+        gameService = new GameServiceImpl();
+        outputService = new OutputServiceImpl();
     }
 }
