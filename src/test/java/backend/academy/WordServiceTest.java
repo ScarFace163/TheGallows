@@ -29,8 +29,8 @@ public class WordServiceTest {
     public void testChooseWordByDifficultFromList() {
         List<Word> wordList = Arrays.asList(
             new Word(new char[]{'e', 'a', 's', 'y'}, "easy", Difficult.EASY),
-            new Word(new char[]{'m', 'e', 'd', 'i', 'u', 'm'}, "medium", Difficult.EASY),
-            new Word(new char[]{'h', 'a', 'r', 'd'}, "hard", Difficult.EASY)
+            new Word(new char[]{'m', 'e', 'd', 'i', 'u', 'm'}, "medium", Difficult.MEDIUM),
+            new Word(new char[]{'h', 'a', 'r', 'd'}, "hard", Difficult.HARD)
         );
 
         Word result = wordService.chooseWordByDifficultFromList(wordList, Difficult.MEDIUM);
