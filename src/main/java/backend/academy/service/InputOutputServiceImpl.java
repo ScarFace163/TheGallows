@@ -1,5 +1,6 @@
 package backend.academy.service;
 
+import backend.academy.enums.Difficult;
 import backend.academy.model.Session;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -37,11 +38,11 @@ public class InputOutputServiceImpl implements InputOutputService {
     }
 
     @Override
-    public int printDifficultChoose() {
+    public Difficult printDifficultChoose() {
         print(
             "Choose one of the suggested difficult.");
-        println(" If you want to randomize, press enter without typing.\n1 - Easy\n2 - Medium\n3 - Hard");
-        return inputDifficultNumber();
+        println(" If you want to randomize, press enter without typing.\n0 - Easy\n1 - Medium\n2 - Hard");
+        return Difficult.values()[inputDifficultNumber()];
 
     }
 
@@ -125,15 +126,14 @@ public class InputOutputServiceImpl implements InputOutputService {
         println("\n");
     }
 
-    @SuppressWarnings("checkstyle:MagicNumber")
     private int inputDifficultNumber() {
         String difficultChoose;
         do {
             difficultChoose = sc.nextLine();
             if (difficultChoose.isEmpty()) {
-                return random.nextInt(3) + 1;
+                return random.nextInt(Difficult.values().length);
             }
-        } while (!"1".equals(difficultChoose) && !"2".equals(difficultChoose) && !"3".equals(difficultChoose));
+        } while (!"0".equals(difficultChoose) && !"1".equals(difficultChoose) && !"2".equals(difficultChoose));
         return Integer.parseInt(difficultChoose);
     }
 

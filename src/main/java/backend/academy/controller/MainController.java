@@ -1,5 +1,6 @@
 package backend.academy.controller;
 
+import backend.academy.enums.Difficult;
 import backend.academy.model.Session;
 import backend.academy.service.CategoryService;
 import backend.academy.service.CategoryServiceImpl;
@@ -9,12 +10,11 @@ import backend.academy.service.WordService;
 import backend.academy.service.WordServiceImpl;
 
 public class MainController implements Controller {
-    CategoryService categoryService;
-    InputOutputService inputOutputService;
-    WordService wordService;
+    private final CategoryService categoryService;
+    private final InputOutputService inputOutputService;
+    private final WordService wordService;
 
     @Override
-    @SuppressWarnings("checkstyle:MagicNumber")
     public void control() {
         String categoryChoose = inputOutputService.printCategoryChoose();
         if (categoryChoose == null) {
@@ -22,15 +22,15 @@ public class MainController implements Controller {
         }
         categoryChoose = categoryService.findCategory(categoryChoose);
         inputOutputService.print("Chosen category : " + categoryChoose + "\n");
-        int difficultChoose = inputOutputService.printDifficultChoose();
+        Difficult difficultChoose = inputOutputService.printDifficultChoose();
         switch (difficultChoose) {
-            case 1:
+            case Difficult.EASY:
                 inputOutputService.print("Chosen difficult : Easy\n");
                 break;
-            case 2:
+            case Difficult.MEDIUM:
                 inputOutputService.print("Chosen difficult  : Medium\n");
                 break;
-            case 3:
+            case Difficult.HARD:
                 inputOutputService.print("Chosen difficult  : Hard\n");
                 break;
             default:

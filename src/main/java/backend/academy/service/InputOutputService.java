@@ -1,11 +1,12 @@
 package backend.academy.service;
 
+import backend.academy.enums.Difficult;
 import backend.academy.model.Session;
 
 public interface InputOutputService {
     String printCategoryChoose();
 
-    int printDifficultChoose();
+    Difficult printDifficultChoose();
 
     void printCurrentGameState(Session session);
 
