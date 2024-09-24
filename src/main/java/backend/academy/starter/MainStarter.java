@@ -1,4 +1,4 @@
-package backend.academy.controller;
+package backend.academy.starter;
 
 import backend.academy.enums.Difficult;
 import backend.academy.model.Session;
@@ -11,14 +11,14 @@ import backend.academy.service.OutputServiceImpl;
 import backend.academy.service.WordService;
 import backend.academy.service.WordServiceImpl;
 
-public class MainController implements Controller {
+public class MainStarter implements Starter {
     private final CategoryService categoryService;
     private final GameService gameService;
     private final OutputService outputService;
     private final WordService wordService;
 
     @Override
-    public void control() {
+    public void start() {
         String categoryChoose = gameService.categoryChoose();
         if (categoryChoose == null) {
             categoryChoose = String.valueOf(categoryService.getRandomCategoryNumber());
@@ -40,13 +40,13 @@ public class MainController implements Controller {
                 outputService.print("There is no such difficult, type another one");
                 break;
         }
-        GameController gameController = new GameController(new Session(
+        GameStarter gameController = new GameStarter(new Session(
             wordService.chooseWordByDifficultFromList(categoryService.getWordsListByCategory(categoryChoose),
                 difficultChoose)));
-        gameController.control();
+        gameController.start();
     }
 
-    public MainController() {
+    public MainStarter() {
         categoryService = new CategoryServiceImpl();
         gameService = new GameServiceImpl();
         outputService = new OutputServiceImpl();

@@ -1,15 +1,15 @@
 package backend.academy;
 
-import backend.academy.controller.MainController;
+import backend.academy.starter.MainStarter;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class Main {
-    MainController mainController;
+    MainStarter mainController;
 
     public static void main(String[] args) {
-        mainController = new MainController();
-        mainController.control();
+        mainController = new MainStarter();
+        mainController.start();
     }
 }
 
