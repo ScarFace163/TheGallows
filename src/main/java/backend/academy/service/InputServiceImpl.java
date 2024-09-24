@@ -1,6 +1,7 @@
 package backend.academy.service;
 
 import backend.academy.enums.Difficult;
+import java.nio.charset.StandardCharsets;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -10,7 +11,7 @@ public class InputServiceImpl implements InputService {
     private final Random random;
 
     public InputServiceImpl() {
-        this.sc = new Scanner(System.in);
+        this.sc = new Scanner(System.in, StandardCharsets.UTF_8);
         this.categoryService = new CategoryServiceImpl();
         random = new Random();
     }

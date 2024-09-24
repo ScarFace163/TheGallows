@@ -26,7 +26,7 @@ public class SessionServiceTest {
     @Test
     public void testIsGameEnded() {
         when(session.currentAttemptsNumber()).thenReturn(5);
-        when(session.maxAttemptsNumber()).thenReturn(5);
+        when(Session.MAX_ATTEMPTS_NUMBER).thenReturn(5);
         assertTrue(sessionService.isGameEnded(session));
 
         char[] testWord = {'t', 'e', 's', 't'};
@@ -34,7 +34,7 @@ public class SessionServiceTest {
         char[] currentGuess = {'_', '_', '_', '_'};
         when(session.currentGuess()).thenReturn(currentGuess);
         when(session.currentAttemptsNumber()).thenReturn(4);
-        when(session.maxAttemptsNumber()).thenReturn(5);
+        when(Session.MAX_ATTEMPTS_NUMBER).thenReturn(5);
         assertFalse(sessionService.isGameEnded(session));
     }
 

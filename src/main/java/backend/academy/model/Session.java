@@ -10,9 +10,9 @@ import lombok.Setter;
     @Setter private char[] currentGuess;
     @Setter private int currentAttemptsNumber = 0;
     @Setter private boolean isHintUsed;
-    private final int minErrorsForHint = 3;
+    public final static int MIN_ERRORS_FOR_HINT = 3;
+    public final static int MAX_ATTEMPTS_NUMBER = 7;
     private final Set<Character> usedLettersSet;
-    private final int maxAttemptsNumber = 7;
     private final Word answer;
 
     public Session(Word answer) {

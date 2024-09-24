@@ -2,8 +2,7 @@ package backend.academy.service;
 
 import backend.academy.enums.Difficult;
 import backend.academy.model.Session;
-import java.nio.charset.StandardCharsets;
-import java.util.Scanner;
+
 
 public class GameServiceImpl implements GameService {
     private final SessionService sessionService;
@@ -26,16 +25,16 @@ public class GameServiceImpl implements GameService {
     public boolean conductGameProcess(Session session) {
         while (!sessionService.isGameEnded(session)) {
             outputService.printCurrentGameState(session);
-            int errorLeft = session.maxAttemptsNumber() - session.currentAttemptsNumber();
+            int errorLeft = Session.MAX_ATTEMPTS_NUMBER - session.currentAttemptsNumber();
             outputService.printCurrentLetterInput(session);
             outputService.println("Errors left: " + errorLeft);
-            if (errorLeft >= session.minErrorsForHint() && !session.isHintUsed()) {
+            if (errorLeft >= Session.MIN_ERRORS_FOR_HINT && !session.isHintUsed()) {
                 outputService.println("Enter letter or -1 if you want a hint");
             } else {
                 outputService.println("Enter letter");
             }
             String letter = inputService.input();
-            if (errorLeft >= session.minErrorsForHint() && "-1".equals(letter) && !session.isHintUsed()) {
+            if (errorLeft >= Session.MIN_ERRORS_FOR_HINT && "-1".equals(letter) && !session.isHintUsed()) {
                 outputService.printHint(session);
                 continue;
             }
@@ -47,12 +46,11 @@ public class GameServiceImpl implements GameService {
             }
         }
         outputService.printCurrentGameState(session);
-        return session.currentAttemptsNumber() != session.maxAttemptsNumber();
+        return session.currentAttemptsNumber() != Session.MAX_ATTEMPTS_NUMBER;
     }
 
     public GameServiceImpl() {
         sessionService = new SessionServiceImpl();
-        new Scanner(System.in, StandardCharsets.UTF_8);
         outputService = new OutputServiceImpl();
         inputService = new InputServiceImpl();
     }
